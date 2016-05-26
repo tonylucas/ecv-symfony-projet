@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Articles</h1>
+    
+    <a class="btn btn-primary" href="{{ path('article_new') }}">Nouvel article</a>
+    
+    <br>
+    <br>
+    
+    Filtrer par catégorie :
+           
+    {% for category in categories %}
+        <a href="/?category={{category.id}}">{{category.name}}</a>
+    {% endfor %}
+    
+    
+    <br>
+    Filtrer par tag :
+           
+    <form action="/" method="get">
+        <input type="text" name="tag">
+        <input type="submit" value="Filtrer">
+    </form>
+        
+    <br>
+    {% if filterCategory is not empty %}
+        Articles dans la catégorie <strong>{{ filterCategory.name }}</strong>
+        <strong><a href="/">(×)</a></strong>
+    {% endif %}
+    
+        
+        
+    {% for article in articles %}
+
+        <a href="{{ path('article_show', {id: article.id}) }}">
+            <h3>{{ article.title }}</h3>
+        </a>
+        <p>
+            {{ article.content }}
+        </p>
+        <hr>
+
+    {% endfor %}
+    
+{% endblock %}

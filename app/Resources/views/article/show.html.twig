@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+  
+    <a href="{{ path('homepage') }}"><- Voir tous les articles</a>
+    
+    
+
+    <h1>{{ article.title }}</h1>
+
+    <p>
+        {{ article.content }}
+    </p>
+    
+    Par <a href="#">{{ article.email }}</a>
+    <br>
+    <br>
+    {% if article.category.name is defined %}
+        Catégorie :
+        <a href="{{ path('category_show', {id: article.category.id}) }}">
+            {{article.category.name}}</a>
+    {% endif %}
+    <br>
+    <br>
+    {% if article.tags is not empty %}
+       Tags : 
+        {% for tag in article.tags %}
+            <a href="#">{{tag.name}}</a>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
